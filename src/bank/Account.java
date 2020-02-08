@@ -4,6 +4,24 @@ public class Account {
 	protected double balance;
 	protected Integer accountNumber;
 	protected String accountType;
+	protected double interest;
+	protected double fee;
+	public double getInterest() {
+		return interest;
+	}
+
+	public void setInterest(double interest) {
+		this.interest = interest;
+	}
+
+	public double getFee() {
+		return fee;
+	}
+
+	public void setFee(double fee) {
+		this.fee = fee;
+	}
+
 	public double getBalance() {
 		return balance;
 	}
@@ -27,6 +45,7 @@ public class Account {
 	public void setAccountType(String accountType) {
 		this.accountType = accountType;
 	}
+
 
 	
 }

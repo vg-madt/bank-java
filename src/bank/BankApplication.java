@@ -75,10 +75,12 @@ public class BankApplication {
 		case 2:
 			userManager.changePassword(in,user);
 			System.out.println("Password is changed");
+			login(in);
 			break;
 		case 3:
 			userManager.changePhoneNumber(in, user);
 			System.out.println("Phone number is changed to "+user.getPhoneNumber());
+			login(in);
 			break;
 		case 4:
 			if(!user.getType().equals("employee")) {
@@ -103,6 +105,8 @@ public class BankApplication {
 			String name = in.next();
 			User existUser = userManager.read(name);
 			accountManager.create(in,existUser);
+			System.out.println("Account is created");
+			login(in);
 			break;
 			}
 		default: 

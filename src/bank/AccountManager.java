@@ -12,23 +12,30 @@ public class AccountManager extends AbstractManager {
 		String accountType = in.next();
 		System.out.println(accountType);
 		if(accountType.equals("chequing")) {
-			ChequingAccount chequing = new ChequingAccount();
+			Account chequing = new Account();
 			System.out.println("Enter the Account number");
 			Integer accountNumber = in.nextInt();
 			chequing.setAccountNumber(accountNumber);
 			System.out.println("Enter the Balance");
 			double balance = in.nextDouble();
+			double fee = calculateFee(balance);
+			chequing.setFee(fee);
+			balance = balance - fee;
 			chequing.setBalance(balance);
 			chequing.setAccountType(accountType);
 			write(BASE_DIR+user.getUsername()+"_"+accountNumber+".json",chequing);
 		}
 		else if(accountType.equals("saving")) {
-			SavingAccount saving = new SavingAccount();
+			Account saving = new Account();
 			System.out.println("Enter the Account number");
 			Integer accountNumber = in.nextInt();
 			saving.setAccountNumber(accountNumber);
 			System.out.println("Enter the Balance");
 			double balance = in.nextDouble();
+			double interest = calculateInterest(balance);
+			saving.setInterest(interest);
+			
+			balance = balance + interest;
 			saving.setBalance(balance);
 			saving.setAccountType(accountType);
 			write(BASE_DIR+user.getUsername()+"_"+accountNumber+".json",saving);
@@ -150,5 +157,43 @@ public class AccountManager extends AbstractManager {
 		return lastFive;
 		
 	}
+	
+	public static double calculateInterest(double balance) {
+		double interest = 0;
+	
+		if(balance > 0 && balance <= 1999) {
+			return interest = 0.1*balance;
+			
+		}
+		else if (balance > 1999 && balance <= 4999) {
+			return interest = 0.2*balance;
+			
+			
+		}
+		else if(balance > 4999) {
+			return interest = 0.3*balance;
+			
+			
+		}
+		return interest;
+	} 
+	
+	public static double calculateFee(double balance) {
+		double fee = 0;
+		if(balance > 0 && balance <= 1999) {
+			return fee = 10;
+	
+		}
+		else if (balance > 1999 && balance <= 4999) {
+			return fee = 20;
+		
+		}
+		else if(balance > 4999) {
+			return fee = 30;
+			
+		}
+		return fee;
+	}
+	
 	
 }
